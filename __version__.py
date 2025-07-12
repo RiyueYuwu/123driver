@@ -1,0 +1,8 @@
+__title__ = "123driver"
+__description__ = "A Python library for 123netdisk API"
+__url__ = "https://github.com/RiyueYuwu/123driver"
+__author__ = "RiyueYuwu"    
+__author_email__ = "2995749773@qq.com"
+__version__ = "0.1.0"   
+__license__ = "MIT"   
+__copyright__ = "Copyright 2025 RiyueYuwu"
