@@ -1,4 +1,4 @@
-__title__ = "123driver"
+__title__ = "123Driver"
 __description__ = "A Python library for 123netdisk API"
 __url__ = "https://github.com/RiyueYuwu/123driver"
 __author__ = "RiyueYuwu"    
