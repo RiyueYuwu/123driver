@@ -3,6 +3,8 @@ import asyncio
 from functools import wraps
 from typing import Any, Dict
 
+import httpx
+from tqdm import tqdm
 from rich.console import Console
 from rich.table import Table
 from cachetools import cached, TTLCache
@@ -180,6 +182,28 @@ class Utils:
         end_time = time.time()
         elapsed_time = end_time - start_time
         return f"{elapsed_time:.3f} s"
+    
+    def download_file(self, url: str, file_path: str, progress_bar: bool = True) -> None:
+        """
+        下载文件
+        
+        Args:
+            url: 文件URL
+            file_path: 保存路径
+            progress_bar: 是否显示进度条
+        """
+        with httpx.stream("GET", url) as response:
+            response.raise_for_status()
+            total_size = int(response.headers.get("Content-Length", 0))
+            if progress_bar:
+                progress = tqdm(total=total_size, unit="iB", unit_scale=True)
+            with open(file_path, "wb") as file:
+                for data in response.iter_bytes():
+                    file.write(data)
+                    if progress_bar:
+                        progress.update(len(data))
+            if progress_bar:
+                progress.close()
 
 
 def async_to_sync(func):

@@ -336,6 +336,11 @@ class API:
         }
         return await self._make_request("POST", "upload/v2/file/single/create", json=data, data=file)
     
+    async def download_file(self, fileId: int) -> Dict[str, Any]:
+        """下载文件"""
+        params = {"fileId": fileId}
+        return await self._make_request("GET", "api/v1/file/download_info", params=params)
+    
     async def create_offline_downlod(self, url: str,  dirID: int, fileName: Optional[str] = None, callBackUrl: Optional[str] = None) -> Dict[str, Any]:
         """创建离线下载任务"""
         data: Dict[str, Any] = {
